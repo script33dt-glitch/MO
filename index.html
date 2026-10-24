@@ -4,8 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#120e12">
+  <meta name="description" content="Uma carta através do tempo, feita para alguém especial.">
   <title>Em Todas as Vidas, Você ❤️</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
@@ -123,6 +127,12 @@
       box-shadow: 0 0 35px #c9a66b35;
     }
 
+    .btn:focus-visible,
+    .musica:focus-visible {
+      outline: 2px solid var(--marfim);
+      outline-offset: 4px;
+    }
+
     .ornamento {
       color: var(--ouro);
       font-size: 30px;
@@ -148,11 +158,11 @@
       width: 42%;
       max-width: 480px;
       aspect-ratio: 3/4;
-      background:
-        linear-gradient(135deg, #4d2936, #171015);
+      background: linear-gradient(135deg, #4d2936, #171015);
       border: 1px solid #b9966350;
       padding: 12px;
       box-shadow: 0 25px 70px #0009;
+      overflow: hidden;
     }
 
     .arte img {
@@ -276,10 +286,19 @@
       height: 50px;
       border-radius: 50%;
       border: 1px solid var(--ouro);
-      background: #1d151ddd;
+      background: #1d151dee;
       color: var(--ouro);
       cursor: pointer;
       font-size: 20px;
+      transition: .3s;
+    }
+
+    .musica:hover {
+      background: var(--vinho);
+    }
+
+    .musica.tocando {
+      box-shadow: 0 0 22px #c9a66b50;
     }
 
     .revelar {
@@ -331,6 +350,11 @@
       .carta {
         padding: 35px 25px;
       }
+
+      .musica {
+        bottom: 18px;
+        right: 18px;
+      }
     }
 
     @media(prefers-reduced-motion: reduce) {
@@ -345,11 +369,17 @@
 
 <body>
 
-  <audio id="audio" src="musica.mp3" loop></audio>
+  <!-- MÚSICA DO SITE -->
+  <!-- O arquivo musica.mp3 deve estar junto do index.html -->
+  <audio id="audio" src="musica.mp3" preload="auto" loop></audio>
 
-  <button class="musica" id="botaoMusica"
-          onclick="alternarMusica()"
-          aria-label="Ativar ou pausar música">
+  <button
+    class="musica"
+    id="botaoMusica"
+    type="button"
+    onclick="alternarMusica()"
+    aria-label="Reproduzir música"
+    title="Reproduzir ou pausar música">
     ♫
   </button>
 
@@ -372,17 +402,16 @@
         parte de mim procurando por você."
       </p>
 
-      <button class="btn"
-        onclick="document.getElementById('inicio').scrollIntoView({behavior:'smooth'})">
+      <button class="btn" type="button" onclick="iniciarHistoria()">
         Descubra o que sinto
       </button>
     </div>
   </section>
 
-  <!-- CAPÍTULO 1 -->
+  <!-- CAPÍTULO I -->
   <section class="capitulo" id="inicio">
     <div class="arte revelar">
-      <img src="arte1.jpg" alt="Pintura romântica do primeiro encontro">
+      <img src="arte1.jpg" alt="O primeiro encontro entre o cavaleiro e sua amada" loading="lazy">
     </div>
 
     <div class="conteudo revelar">
@@ -409,10 +438,10 @@
     </div>
   </section>
 
-  <!-- CAPÍTULO 2 -->
+  <!-- CAPÍTULO II -->
   <section class="capitulo">
     <div class="arte revelar">
-      <img src="arte2.jpg" alt="Pintura de um jardim tranquilo">
+      <img src="arte2.jpg" alt="Um momento de paz entre o cavaleiro e sua amada" loading="lazy">
     </div>
 
     <div class="conteudo revelar">
@@ -441,7 +470,7 @@
     </div>
   </section>
 
-  <!-- FRASE -->
+  <!-- FRASE ESPECIAL -->
   <section class="citacao">
     <div class="revelar">
       <div class="ornamento">❦</div>
@@ -455,10 +484,10 @@
     </div>
   </section>
 
-  <!-- CAPÍTULO 3 -->
+  <!-- CAPÍTULO III -->
   <section class="capitulo">
     <div class="arte revelar">
-      <img src="arte3.jpg" alt="Pintura clássica de mãos próximas">
+      <img src="arte3.jpg" alt="As mãos do cavaleiro e sua amada quase se tocando" loading="lazy">
     </div>
 
     <div class="conteudo revelar">
@@ -490,10 +519,10 @@
     </div>
   </section>
 
-  <!-- CAPÍTULO 4 -->
+  <!-- CAPÍTULO IV -->
   <section class="capitulo">
     <div class="arte revelar">
-      <img src="arte4.jpg" alt="Pintura de um caminho ao pôr do sol">
+      <img src="arte4.jpg" alt="O cavaleiro e sua amada caminhando ao pôr do sol" loading="lazy">
     </div>
 
     <div class="conteudo revelar">
@@ -525,10 +554,10 @@
     </div>
   </section>
 
-  <!-- CAPÍTULO 5 -->
+  <!-- CAPÍTULO V -->
   <section class="capitulo">
     <div class="arte revelar">
-      <img src="arte5.jpg" alt="Pintura romântica sob as estrelas">
+      <img src="arte5.jpg" alt="O cavaleiro e sua amada contemplando as estrelas" loading="lazy">
     </div>
 
     <div class="conteudo revelar">
@@ -560,7 +589,7 @@
     </div>
   </section>
 
-  <!-- FINAL -->
+  <!-- CARTA FINAL -->
   <section class="final">
     <div class="eyebrow">
       O último capítulo
@@ -578,7 +607,7 @@
       eu gostaria de te dizer.
     </p>
 
-    <button class="btn" onclick="abrirCarta()">
+    <button class="btn" type="button" onclick="abrirCarta()">
       Abrir minha carta para você
     </button>
 
@@ -630,24 +659,99 @@
   </footer>
 
   <script>
-    // ANIMAÇÕES AO ROLAR A PÁGINA
-    const observer = new IntersectionObserver(
-      (entradas) => {
-        entradas.forEach((entrada) => {
-          if (entrada.isIntersecting) {
-            entrada.target.classList.add("visivel");
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    // ELEMENTOS DA MÚSICA
+    const audio = document.getElementById("audio");
+    const botaoMusica = document.getElementById("botaoMusica");
 
-    document.querySelectorAll(".revelar")
-      .forEach((elemento) => observer.observe(elemento));
+    // Volume inicial suave: 35%
+    audio.volume = 0.35;
+
+    // ATUALIZA O BOTÃO DE MÚSICA
+    function atualizarBotaoMusica() {
+      if (audio.paused) {
+        botaoMusica.textContent = "♫";
+        botaoMusica.classList.remove("tocando");
+        botaoMusica.setAttribute("aria-label", "Reproduzir música");
+      } else {
+        botaoMusica.textContent = "❚❚";
+        botaoMusica.classList.add("tocando");
+        botaoMusica.setAttribute("aria-label", "Pausar música");
+      }
+    }
+
+    // COMEÇAR A HISTÓRIA COM MÚSICA
+    function iniciarHistoria() {
+      const inicio = document.getElementById("inicio");
+
+      // Começa a reprodução após o clique da pessoa
+      audio.play()
+        .then(() => {
+          atualizarBotaoMusica();
+        })
+        .catch((erro) => {
+          console.warn("A música não pôde iniciar:", erro);
+          atualizarBotaoMusica();
+        });
+
+      // Desce para o primeiro capítulo
+      inicio.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    // PAUSAR OU RETOMAR A MÚSICA
+    async function alternarMusica() {
+      if (audio.paused) {
+        try {
+          await audio.play();
+        } catch (erro) {
+          console.warn("Não foi possível reproduzir a música:", erro);
+          alert(
+            "Não foi possível tocar a música. Confira se musica.mp3 está na mesma pasta do index.html."
+          );
+        }
+      } else {
+        audio.pause();
+      }
+
+      atualizarBotaoMusica();
+    }
+
+    // MANTÉM O BOTÃO SINCRONIZADO COM O ÁUDIO
+    audio.addEventListener("play", atualizarBotaoMusica);
+    audio.addEventListener("pause", atualizarBotaoMusica);
+
+    audio.addEventListener("error", () => {
+      console.warn("Erro ao carregar musica.mp3");
+      atualizarBotaoMusica();
+    });
+
+    // ANIMAÇÕES AO ROLAR A PÁGINA
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entradas) => {
+          entradas.forEach((entrada) => {
+            if (entrada.isIntersecting) {
+              entrada.target.classList.add("visivel");
+              observer.unobserve(entrada.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll(".revelar")
+        .forEach((elemento) => observer.observe(elemento));
+    } else {
+      document.querySelectorAll(".revelar")
+        .forEach((elemento) => elemento.classList.add("visivel"));
+    }
 
     // ABRIR CARTA
     function abrirCarta() {
       const carta = document.getElementById("carta");
+
       carta.classList.add("aberta");
 
       setTimeout(() => {
@@ -656,24 +760,6 @@
           block: "center"
         });
       }, 100);
-    }
-
-    // CONTROLE DE MÚSICA
-    const audio = document.getElementById("audio");
-    const botaoMusica = document.getElementById("botaoMusica");
-
-    async function alternarMusica() {
-      if (audio.paused) {
-        try {
-          await audio.play();
-          botaoMusica.textContent = "❚❚";
-        } catch (erro) {
-          alert("Adicione um arquivo musica.mp3 na pasta do site.");
-        }
-      } else {
-        audio.pause();
-        botaoMusica.textContent = "♫";
-      }
     }
   </script>
 
