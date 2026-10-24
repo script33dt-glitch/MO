@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Em Todas as Vidas, Você ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --fundo: #120e12;
+      --vinho: #632c38;
+      --ouro: #c9a66b;
+      --marfim: #f4e8d7;
+      --texto: #d7c8bd;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--marfim);
+      font-family: "Montserrat", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 20%,
+        rgba(0,0,0,.55) 100%
+      );
+      z-index: 5;
+    }
+
+    h1, h2, h3, blockquote {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+      background:
+        linear-gradient(
+          rgba(18,14,18,.3),
+          rgba(18,14,18,.95)
+        ),
+        url("pintura.jpg") center/cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 6;
+      max-width: 850px;
+      animation: surgir 2s ease both;
+    }
+
+    .eyebrow {
+      color: var(--ouro);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 10px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(65px, 11vw, 140px);
+      line-height: .9;
+      margin-bottom: 35px;
+    }
+
+    h1 em {
+      color: var(--ouro);
+      font-weight: 400;
+    }
+
+    .intro {
+      max-width: 550px;
+      margin: 0 auto 40px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(23px, 4vw, 32px);
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--texto);
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid var(--ouro);
+      color: var(--ouro);
+      padding: 17px 32px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 10px;
+      cursor: pointer;
+      transition: .4s;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .btn:hover {
+      background: var(--ouro);
+      color: var(--fundo);
+      box-shadow: 0 0 35px #c9a66b35;
+    }
+
+    .ornamento {
+      color: var(--ouro);
+      font-size: 30px;
+      margin: 25px 0;
+      text-align: center;
+    }
+
+    .capitulo {
+      min-height: 90vh;
+      padding: 110px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8%;
+      position: relative;
+    }
+
+    .capitulo:nth-of-type(even) {
+      background: #1a1219;
+    }
+
+    .arte {
+      width: 42%;
+      max-width: 480px;
+      aspect-ratio: 3/4;
+      background:
+        linear-gradient(135deg, #4d2936, #171015);
+      border: 1px solid #b9966350;
+      padding: 12px;
+      box-shadow: 0 25px 70px #0009;
+    }
+
+    .arte img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(.8) saturate(.75);
+      transition: .8s;
+    }
+
+    .arte:hover img {
+      filter: brightness(1) saturate(1);
+      transform: scale(1.015);
+    }
+
+    .conteudo {
+      max-width: 500px;
+      flex: 1;
+    }
+
+    .numero {
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--ouro);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(45px, 6vw, 85px);
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+
+    .linha {
+      height: 1px;
+      width: 70px;
+      background: var(--ouro);
+      margin-bottom: 30px;
+    }
+
+    .conteudo p {
+      color: var(--texto);
+      font-size: 15px;
+      line-height: 2.1;
+      font-weight: 300;
+    }
+
+    .citacao {
+      padding: 130px 20px;
+      text-align: center;
+      background:
+        radial-gradient(
+          ellipse at center,
+          #45202c,
+          #120e12 75%
+        );
+    }
+
+    blockquote {
+      max-width: 850px;
+      margin: auto;
+      font-size: clamp(35px, 6vw, 75px);
+      font-style: italic;
+      line-height: 1.15;
+    }
+
+    .final {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .final h2 {
+      max-width: 750px;
+    }
+
+    .carta {
+      display: none;
+      background: #f0dfc5;
+      color: #442e31;
+      max-width: 650px;
+      width: 100%;
+      margin-top: 45px;
+      padding: 55px 40px;
+      text-align: left;
+      box-shadow: 0 20px 70px #0009;
+      animation: surgir 1s ease;
+    }
+
+    .carta.aberta {
+      display: block;
+    }
+
+    .carta h3 {
+      font-size: 45px;
+      margin-bottom: 25px;
+    }
+
+    .carta p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .assinatura {
+      text-align: right;
+      font-style: italic;
+    }
+
+    .musica {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 20;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid var(--ouro);
+      background: #1d151ddd;
+      color: var(--ouro);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .revelar {
+      opacity: 0;
+      transform: translateY(45px);
+      transition: opacity 1s, transform 1s;
+    }
+
+    .revelar.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      padding: 35px;
+      text-align: center;
+      color: #a18c7a;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes surgir {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width: 750px) {
+      .capitulo {
+        flex-direction: column;
+        padding: 90px 7%;
+        gap: 45px;
+      }
+
+      .arte {
+        width: 100%;
+        max-width: 380px;
+      }
+
+      .conteudo {
+        width: 100%;
+      }
+
+      .carta {
+        padding: 35px 25px;
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="audio" src="musica.mp3" loop></audio>
+
+  <button class="musica" id="botaoMusica"
+          onclick="alternarMusica()"
+          aria-label="Ativar ou pausar música">
+    ♫
+  </button>
+
+  <!-- ABERTURA -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">
+        Uma carta através do tempo
+      </div>
+
+      <h1>
+        Em Todas<br>
+        as Vidas,<br>
+        <em>Você.</em>
+      </h1>
+
+      <p class="intro">
+        "Se o universo me oferecesse infinitas
+        possibilidades, ainda haveria uma
+        parte de mim procurando por você."
+      </p>
+
+      <button class="btn"
+        onclick="document.getElementById('inicio').scrollIntoView({behavior:'smooth'})">
+        Descubra o que sinto
+      </button>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 1 -->
+  <section class="capitulo" id="inicio">
+    <div class="arte revelar">
+      <img src="arte1.jpg" alt="Pintura romântica do primeiro encontro">
+    </div>
+
+    <div class="conteudo revelar">
+      <div class="numero">CAPÍTULO I</div>
+      <h2>O acaso que eu escolheria novamente.</h2>
+      <div class="linha"></div>
+
+      <p>
+        Existem bilhões de pessoas neste mundo.
+        Milhões de caminhos, encontros e possibilidades.
+
+        <br><br>
+
+        E, entre tantas histórias que poderiam ter
+        acontecido, a vida permitiu que a minha
+        cruzasse com a sua.
+
+        <br><br>
+
+        Talvez tenha sido apenas uma coincidência.
+        Mas, se eu pudesse voltar no tempo,
+        escolheria conhecer você outra vez.
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 2 -->
+  <section class="capitulo">
+    <div class="arte revelar">
+      <img src="arte2.jpg" alt="Pintura de um jardim tranquilo">
+    </div>
+
+    <div class="conteudo revelar">
+      <div class="numero">CAPÍTULO II</div>
+      <h2>A paz que encontro em você.</h2>
+      <div class="linha"></div>
+
+      <p>
+        O mundo nem sempre é silencioso.
+        Existem dias difíceis, pensamentos
+        confusos e momentos que parecem
+        não ter fim.
+
+        <br><br>
+
+        Mas há algo diferente quando estou
+        ao seu lado.
+
+        <br><br>
+
+        Não preciso que tudo seja perfeito.
+        Às vezes, um sorriso seu ou uma
+        conversa simples já transforma
+        completamente o meu dia.
+      </p>
+    </div>
+  </section>
+
+  <!-- FRASE -->
+  <section class="citacao">
+    <div class="revelar">
+      <div class="ornamento">❦</div>
+
+      <blockquote>
+        "Talvez o amor não seja encontrar
+        alguém perfeito, mas descobrir
+        alguém com quem até o imperfeito
+        se torna bonito."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 3 -->
+  <section class="capitulo">
+    <div class="arte revelar">
+      <img src="arte3.jpg" alt="Pintura clássica de mãos próximas">
+    </div>
+
+    <div class="conteudo revelar">
+      <div class="numero">CAPÍTULO III</div>
+      <h2>Os detalhes que fazem você ser você.</h2>
+      <div class="linha"></div>
+
+      <p>
+        Eu poderia falar sobre a sua beleza.
+        Sobre o seu sorriso.
+        Sobre o quanto gosto de olhar para você.
+
+        <br><br>
+
+        Mas seria pouco.
+
+        <br><br>
+
+        Porque existem pequenos detalhes
+        no seu jeito que talvez você
+        nem perceba.
+
+        <br><br>
+
+        E são justamente essas pequenas coisas
+        que fazem você ser alguém tão especial
+        para mim.
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 4 -->
+  <section class="capitulo">
+    <div class="arte revelar">
+      <img src="arte4.jpg" alt="Pintura de um caminho ao pôr do sol">
+    </div>
+
+    <div class="conteudo revelar">
+      <div class="numero">CAPÍTULO IV</div>
+      <h2>As histórias que ainda não vivemos.</h2>
+      <div class="linha"></div>
+
+      <p>
+        Eu não sei exatamente o que
+        o futuro guarda para nós.
+
+        <br><br>
+
+        Não posso prometer dias perfeitos
+        nem uma vida sem dificuldades.
+
+        <br><br>
+
+        Mas posso dizer que gostaria
+        de descobrir o amanhã com você.
+
+        <br><br>
+
+        Criar lembranças, compartilhar
+        conquistas e transformar momentos
+        simples em histórias que um dia
+        vamos querer recordar.
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO 5 -->
+  <section class="capitulo">
+    <div class="arte revelar">
+      <img src="arte5.jpg" alt="Pintura romântica sob as estrelas">
+    </div>
+
+    <div class="conteudo revelar">
+      <div class="numero">CAPÍTULO V</div>
+      <h2>Por que eu escolheria você?</h2>
+      <div class="linha"></div>
+
+      <p>
+        Não porque eu precise de alguém
+        para completar minha vida.
+
+        <br><br>
+
+        Mas porque gosto da pessoa que
+        sou quando estamos juntos.
+
+        <br><br>
+
+        Porque gosto da sua companhia,
+        das nossas conversas e da
+        possibilidade de existir um nós.
+
+        <br><br>
+
+        E, se você também sentir que
+        vale a pena, eu gostaria de
+        continuar escolhendo você.
+      </p>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="eyebrow">
+      O último capítulo
+    </div>
+
+    <h2>
+      Algumas histórias merecem
+      ser escritas a dois.
+    </h2>
+
+    <div class="ornamento">✧</div>
+
+    <p class="intro">
+      Existe uma última coisa que
+      eu gostaria de te dizer.
+    </p>
+
+    <button class="btn" onclick="abrirCarta()">
+      Abrir minha carta para você
+    </button>
+
+    <div class="carta" id="carta">
+      <h3>Para você,</h3>
+
+      <p>
+        Se você chegou até aqui,
+        significa que leu um pequeno
+        pedaço de tudo aquilo que
+        eu sinto e nem sempre
+        consigo colocar em palavras.
+      </p>
+
+      <p>
+        Eu não criei isso para te
+        convencer de nada.
+        Criei porque existem sentimentos
+        que merecem ser expressos
+        com carinho.
+      </p>
+
+      <p>
+        Eu gosto de você.
+        Gosto de quem você é,
+        dos momentos que compartilhamos
+        e daquilo que ainda podemos
+        descobrir um sobre o outro.
+      </p>
+
+      <p>
+        Não sei quantas páginas
+        nossa história terá.
+
+        Mas, se você quiser,
+        eu adoraria escrever
+        as próximas ao seu lado.
+      </p>
+
+      <p class="assinatura">
+        Com carinho,<br>
+        alguém que escolheria você. ❤️
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    FEITO COM CARINHO • EM TODAS AS VIDAS, VOCÊ
+  </footer>
+
+  <script>
+    // ANIMAÇÕES AO ROLAR A PÁGINA
+    const observer = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("visivel");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".revelar")
+      .forEach((elemento) => observer.observe(elemento));
+
+    // ABRIR CARTA
+    function abrirCarta() {
+      const carta = document.getElementById("carta");
+      carta.classList.add("aberta");
+
+      setTimeout(() => {
+        carta.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 100);
+    }
+
+    // CONTROLE DE MÚSICA
+    const audio = document.getElementById("audio");
+    const botaoMusica = document.getElementById("botaoMusica");
+
+    async function alternarMusica() {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          botaoMusica.textContent = "❚❚";
+        } catch (erro) {
+          alert("Adicione um arquivo musica.mp3 na pasta do site.");
+        }
+      } else {
+        audio.pause();
+        botaoMusica.textContent = "♫";
+      }
+    }
+  </script>
+
+</body>
+</html>
