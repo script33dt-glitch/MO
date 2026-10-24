@@ -371,7 +371,7 @@
 
   <!-- MÚSICA DO SITE -->
   <!-- O arquivo musica.mp3 deve estar junto do index.html -->
-  <audio id="audio" src="musica.mp3" preload="auto" loop></audio>
+  <audio id="audio" src="musica.mp3" preload="auto" autoplay loop></audio>
 
   <button
     class="musica"
@@ -666,6 +666,30 @@
     // Volume inicial suave: 35%
     audio.volume = 0.35;
 
+    // Tenta tocar ao abrir a página. Alguns navegadores bloqueiam autoplay com som.
+    let musicaPausadaPeloVisitante = false;
+    function tentarIniciarMusica() {
+      if (musicaPausadaPeloVisitante || !audio.paused) return;
+      audio.play().catch(() => {
+        // Se o navegador bloquear, aguardamos a primeira interação.
+      });
+    }
+
+    window.addEventListener("load", tentarIniciarMusica);
+    tentarIniciarMusica();
+
+    // Um toque em qualquer lugar libera a música quando o autoplay é bloqueado.
+    // Não interfere no botão de música, que tem seu próprio controle.
+    function iniciarMusicaNaInteracao(evento) {
+      if (evento.target.closest("#botaoMusica")) return;
+      if (!musicaPausadaPeloVisitante) tentarIniciarMusica();
+    }
+    document.addEventListener("pointerdown", iniciarMusicaNaInteracao);
+    document.addEventListener("keydown", (evento) => {
+      if (evento.target.closest && evento.target.closest("#botaoMusica")) return;
+      if (!musicaPausadaPeloVisitante) tentarIniciarMusica();
+    });
+
     // ATUALIZA O BOTÃO DE MÚSICA
     function atualizarBotaoMusica() {
       if (audio.paused) {
@@ -683,8 +707,8 @@
     function iniciarHistoria() {
       const inicio = document.getElementById("inicio");
 
-      // Começa a reprodução após o clique da pessoa
-      audio.play()
+      // Inicia no clique, caso o navegador tenha bloqueado o autoplay
+      if (!musicaPausadaPeloVisitante) audio.play()
         .then(() => {
           atualizarBotaoMusica();
         })
@@ -703,6 +727,7 @@
     // PAUSAR OU RETOMAR A MÚSICA
     async function alternarMusica() {
       if (audio.paused) {
+        musicaPausadaPeloVisitante = false;
         try {
           await audio.play();
         } catch (erro) {
@@ -712,6 +737,7 @@
           );
         }
       } else {
+        musicaPausadaPeloVisitante = true;
         audio.pause();
       }
 
